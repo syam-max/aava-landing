@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aava — Where real people help each other live slightly better</title>
+<meta name="description" content="Aava is building a trust-first way for India to discover products worth buying — through the honest experiences of real people. Join as an early creator or builder. Building from Hyderabad.">
+<meta property="og:title" content="Aava — Where real people help each other live slightly better">
+<meta property="og:description" content="Where real people help each other live slightly better — and where that help lasts.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.aava.so">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --ink:        #1C1917;
+  --ink-soft:   #57534E;
+  --ink-muted:  #A8A29E;
+  --cream:      #FAFAF8;
+  --warm:       #F5F0E8;
+  --warm-mid:   #E8DFD0;
+  --accent:     #C2622A;
+  --accent-lt:  #F0E4D8;
+  --accent-dk:  #8B3A15;
+  --green:      #2D6A4F;
+  --green-lt:   #D8EEE5;
+  --border:     #E5DDD4;
+  --max:        800px;
+}
+
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250,250,248,0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 28px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Lora', serif;
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.3px;
+}
+.nav-logo span { color: var(--accent); }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  padding: 7px 13px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.14s, color 0.14s;
+}
+.nav-link:hover { background: var(--warm); color: var(--ink); }
+.nav-cta {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background: var(--accent);
+  padding: 8px 18px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.14s, transform 0.14s;
+  display: inline-block;
+}
+.nav-cta:hover { background: var(--accent-dk); transform: translateY(-1px); }
+.nav-burger {
+  display: none;
+  cursor: pointer;
+  padding: 6px;
+  color: var(--ink);
+}
+.nav-burger svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+/* Mobile drawer */
+.drawer {
+  display: none;
+  position: fixed;
+  inset: 58px 0 0 0;
+  background: rgba(28,25,23,0.35);
+  z-index: 90;
+}
+.drawer-panel {
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+}
+.drawer-link {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  padding: 14px 28px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+.drawer-link:last-child { border-bottom: none; color: var(--accent); font-weight: 600; }
+.drawer.open { display: block; }
+
+/* ═══════════════════════════════════════════
+   UTILITY
+═══════════════════════════════════════════ */
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.eyebrow-bar { width: 24px; height: 1.5px; background: var(--accent); flex-shrink: 0; }
+.eyebrow-text {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.divider { border: none; border-top: 1px solid var(--border); }
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════ */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.rise { opacity: 0; animation: rise 0.6s ease forwards; }
+.r1 { animation-delay: 0.06s; }
+.r2 { animation-delay: 0.16s; }
+.r3 { animation-delay: 0.26s; }
+.r4 { animation-delay: 0.36s; }
+.r5 { animation-delay: 0.46s; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero {
+  padding: 96px 28px 88px;
+  max-width: var(--max);
+  margin: 0 auto;
+  text-align: center;
+}
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-lt);
+  color: var(--accent-dk);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 13px;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+  margin-bottom: 28px;
+}
+.hero-kicker-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+.hero-h1 {
+  font-family: 'Lora', serif;
+  font-size: clamp(32px, 5.5vw, 54px);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.18;
+  letter-spacing: -0.6px;
+  margin-bottom: 22px;
+  max-width: 660px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-h1 em { font-style: italic; color: var(--accent); }
+.hero-sub {
+  font-size: clamp(16px, 2vw, 18px);
+  color: var(--ink-soft);
+  line-height: 1.65;
+  max-width: 500px;
+  margin: 0 auto 36px;
+}
+.hero-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.btn-solid {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 13px 28px;
+  border-radius: 11px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.14s, transform 0.14s, box-shadow 0.14s;
+  letter-spacing: -0.1px;
+}
+.btn-solid:hover { background: var(--accent-dk); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(194,98,42,0.25); }
+.btn-ghost {
+  display: inline-block;
+  background: white;
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 13px 28px;
+  border-radius: 11px;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  transition: background 0.14s, border-color 0.14s;
+}
+.btn-ghost:hover { background: var(--warm); border-color: var(--warm-mid); }
+.hero-tagline {
+  font-family: 'Lora', serif;
+  font-size: 15px;
+  font-style: italic;
+  color: var(--ink-muted);
+}
+
+/* ═══════════════════════════════════════════
+   PROBLEM BAND
+═══════════════════════════════════════════ */
+.problem-band {
+  background: var(--ink);
+  padding: 56px 28px;
+}
+.problem-band-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.problem-band-head {
+  font-family: 'Lora', serif;
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 600;
+  color: white;
+  line-height: 1.38;
+  margin-bottom: 32px;
+  max-width: 520px;
+}
+.problem-band-head em { font-style: italic; color: rgba(194,98,42,0.85); }
+.problem-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.problem-item {
+  background: rgba(255,255,255,0.025);
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.problem-item-icon { font-size: 18px; }
+.problem-item-title { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.8); }
+.problem-item-body { font-size: 12px; color: rgba(255,255,255,0.38); line-height: 1.55; }
+
+/* ═══════════════════════════════════════════
+   SECTION BASE
+═══════════════════════════════════════════ */
+.section { padding: 80px 28px; max-width: var(--max); margin: 0 auto; }
+.section-h {
+  font-family: 'Lora', serif;
+  font-size: clamp(24px, 3.5vw, 36px);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.26;
+  letter-spacing: -0.3px;
+  margin-bottom: 14px;
+  max-width: 540px;
+}
+.section-h em { font-style: italic; color: var(--accent); }
+.section-sub {
+  font-size: 16px;
+  color: var(--ink-soft);
+  line-height: 1.68;
+  max-width: 500px;
+  margin-bottom: 44px;
+}
+
+/* ═══════════════════════════════════════════
+   INSIGHT BLOCK (mission)
+═══════════════════════════════════════════ */
+.insight-pull {
+  background: var(--warm);
+  border-left: 3.5px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+  padding: 24px 26px;
+  margin-bottom: 28px;
+}
+.insight-pull p {
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.65;
+}
+.prose {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.75;
+}
+.prose p + p { margin-top: 14px; }
+
+/* ═══════════════════════════════════════════
+   VALUES LIST
+═══════════════════════════════════════════ */
+.values-list {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-top: 44px;
+  background: white;
+}
+.value-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.12s;
+}
+.value-item:last-child { border-bottom: none; }
+.value-item:hover { background: var(--cream); }
+.value-pip {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  background: var(--accent-lt);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.value-name { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.value-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.5; }
+
+/* ═══════════════════════════════════════════
+   CREATOR SECTION
+═══════════════════════════════════════════ */
+.creator-bg {
+  background: var(--warm);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Three truths */
+.truths {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.truth {
+  background: white;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.truth-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.truth-body {
+  font-family: 'Lora', serif;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.truth-body strong { color: var(--ink); font-style: normal; font-weight: 600; }
+
+/* Shift quote */
+.shift {
+  background: white;
+  border: 1px solid var(--border);
+  border-left: 3.5px solid var(--accent);
+  border-radius: 0 13px 13px 0;
+  padding: 28px 28px;
+  margin-bottom: 40px;
+}
+.shift-q {
+  font-family: 'Lora', serif;
+  font-size: clamp(16px, 2.2vw, 20px);
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.55;
+  margin-bottom: 13px;
+}
+.shift-body { font-size: 15px; color: var(--ink-soft); line-height: 1.65; }
+
+/* Before/after */
+.changes {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  background: white;
+  margin-bottom: 40px;
+}
+.change-row {
+  display: grid;
+  grid-template-columns: 1fr 32px 1fr;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+.change-row:last-child { border-bottom: none; }
+.change-before {
+  padding: 15px 16px;
+  font-size: 14px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  text-decoration: line-through;
+  text-decoration-color: rgba(168,162,158,0.4);
+}
+.change-arr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 13px;
+}
+.change-after {
+  padding: 15px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+/* Who for */
+.who-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+.who-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  transition: border-color 0.14s, box-shadow 0.14s;
+}
+.who-card:hover { border-color: var(--accent); box-shadow: 0 3px 16px rgba(194,98,42,0.08); }
+.who-em { font-size: 20px; }
+.who-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+.who-body { font-size: 13px; color: var(--ink-muted); line-height: 1.5; }
+
+/* Feeling */
+.feeling {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 36px 32px;
+  text-align: center;
+}
+.feeling-pip {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: var(--green-lt);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 18px;
+}
+.feeling-pip svg { width: 20px; height: 20px; stroke: var(--green); fill: none; stroke-width: 2; }
+.feeling-q {
+  font-family: 'Lora', serif;
+  font-size: clamp(15px, 2vw, 18px);
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.6;
+  margin-bottom: 13px;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.feeling-body {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════
+   TEAM SECTION
+═══════════════════════════════════════════ */
+.roles-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+.role-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  transition: border-color 0.14s, box-shadow 0.14s;
+}
+.role-card:hover { border-color: var(--accent); box-shadow: 0 3px 14px rgba(194,98,42,0.07); }
+.role-icon {
+  width: 38px; height: 38px;
+  border-radius: 9px;
+  background: var(--accent-lt);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.role-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+.role-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.5; }
+
+.qualities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 0;
+}
+.quality {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px 15px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.q-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+.q-text { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+
+/* ═══════════════════════════════════════════
+   FOUNDER BAND
+═══════════════════════════════════════════ */
+.founder-bg { background: var(--ink); }
+.founder-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 80px 28px;
+}
+.founder-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(194,98,42,0.75);
+  margin-bottom: 18px;
+}
+.founder-h {
+  font-family: 'Lora', serif;
+  font-size: clamp(22px, 3.5vw, 32px);
+  font-weight: 600;
+  color: white;
+  line-height: 1.3;
+  margin-bottom: 22px;
+  max-width: 460px;
+}
+.founder-body {
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.75;
+  max-width: 520px;
+  margin-bottom: 36px;
+}
+.founder-body p + p { margin-top: 13px; }
+.founder-divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 36px 0; }
+.decision-q {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 13px;
+  padding: 26px 26px;
+  margin-bottom: 28px;
+}
+.decision-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  margin-bottom: 11px;
+}
+.decision-text {
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+}
+.founder-sig {
+  font-size: 14px;
+  color: rgba(255,255,255,0.35);
+}
+.founder-sig span { color: rgba(255,255,255,0.7); font-weight: 600; }
+.founder-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 18px;
+  transition: color 0.14s;
+}
+.founder-email svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
+.founder-email:hover { color: rgba(194,98,42,0.75); }
+
+/* ═══════════════════════════════════════════
+   DOUBLE CTA
+═══════════════════════════════════════════ */
+.cta-pair {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 72px 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.cta-box {
+  border-radius: 18px;
+  padding: 38px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.cta-box::before {
+  content: '';
+  position: absolute;
+  top: -48px; right: -48px;
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.cta-dark {
+  background: var(--ink);
+}
+.cta-dark::before { background: rgba(194,98,42,0.11); }
+.cta-light {
+  background: var(--warm);
+  border: 1px solid var(--border);
+}
+.cta-light::before { background: rgba(194,98,42,0.05); }
+.cta-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 13px;
+  position: relative; z-index: 1;
+}
+.cta-dark .cta-tag { color: rgba(194,98,42,0.8); }
+.cta-light .cta-tag { color: var(--accent); }
+.cta-h {
+  font-family: 'Lora', serif;
+  font-size: clamp(19px, 2.5vw, 24px);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 11px;
+  position: relative; z-index: 1;
+}
+.cta-dark .cta-h { color: white; }
+.cta-light .cta-h { color: var(--ink); }
+.cta-p {
+  font-size: 14px;
+  line-height: 1.65;
+  margin-bottom: 26px;
+  position: relative; z-index: 1;
+}
+.cta-dark .cta-p { color: rgba(255,255,255,0.45); }
+.cta-light .cta-p { color: var(--ink-soft); }
+.cta-btn {
+  display: inline-block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.14s, transform 0.14s;
+  position: relative; z-index: 1;
+}
+.cta-dark .cta-btn { background: var(--accent); color: white; }
+.cta-dark .cta-btn:hover { background: var(--accent-dk); transform: translateY(-1px); }
+.cta-light .cta-btn { background: var(--ink); color: white; }
+.cta-light .cta-btn:hover { background: #2c2825; transform: translateY(-1px); }
+.cta-hint {
+  font-size: 12px;
+  margin-top: 11px;
+  position: relative; z-index: 1;
+}
+.cta-dark .cta-hint { color: rgba(255,255,255,0.22); }
+.cta-light .cta-hint { color: var(--ink-muted); }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.footer {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.footer-logo { font-family: 'Lora', serif; font-size: 17px; font-weight: 600; color: var(--ink); }
+.footer-logo span { color: var(--accent); }
+.footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+.footer-link { font-size: 13px; color: var(--ink-muted); transition: color 0.14s; }
+.footer-link:hover { color: var(--ink); }
+.footer-copy { font-size: 12px; color: var(--ink-muted); width: 100%; }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 720px) {
+  .nav-right .nav-link { display: none; }
+  .nav-right .nav-cta { display: none; }
+  .nav-burger { display: flex; }
+
+  .hero { padding: 64px 20px 56px; }
+  .section { padding: 60px 20px; }
+
+  .problem-list { grid-template-columns: 1fr 1fr; }
+  .truths { grid-template-columns: 1fr; }
+  .who-grid { grid-template-columns: 1fr; }
+  .roles-grid { grid-template-columns: 1fr 1fr; }
+  .qualities { grid-template-columns: 1fr; }
+  .cta-pair { grid-template-columns: 1fr; padding: 52px 20px; }
+  .cta-box { padding: 30px 24px; }
+  .founder-inner { padding: 60px 20px; }
+  .footer { padding: 22px 20px; }
+  .change-before, .change-after { font-size: 13px; padding: 13px 13px; }
+}
+
+@media (max-width: 480px) {
+  .problem-list { grid-template-columns: 1fr; }
+  .roles-grid { grid-template-columns: 1fr; }
+  .hero-h1 { font-size: 30px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">aav<span>a</span></a>
+    <div class="nav-right">
+      <a class="nav-link" href="#mission">Mission</a>
+      <a class="nav-link" href="#creators">For creators</a>
+      <a class="nav-link" href="#team">Join us</a>
+      <a class="nav-cta" href="mailto:syam@aava.so?subject=I want to create on Aava&body=Hi Syam,%0D%0A%0D%0AHere%27s a bit about me:%0D%0A%0D%0ACategories I could write about:%0D%0A%0D%0AOne thing I%27ve bought recently that I have strong opinions about:%0D%0A">Write to Syam</a>
+      <div class="nav-burger" onclick="toggleDrawer()">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="drawer" id="drawer" onclick="toggleDrawer()">
+  <div class="drawer-panel" onclick="event.stopPropagation()">
+    <a class="drawer-link" href="#mission"   onclick="toggleDrawer()">Mission</a>
+    <a class="drawer-link" href="#creators"  onclick="toggleDrawer()">For creators</a>
+    <a class="drawer-link" href="#team"      onclick="toggleDrawer()">Join us</a>
+    <a class="drawer-link" href="mailto:syam@aava.so?subject=I want to create on Aava">Write to Syam →</a>
+  </div>
+</div>
+
+<!-- ═══ HERO ═══════════════════════════════ -->
+<section style="border-bottom:1px solid var(--border);">
+  <div class="hero">
+    <div class="hero-kicker rise r1">
+      <div class="hero-kicker-dot"></div>
+      Building from Hyderabad · Early stage
+    </div>
+    <h1 class="hero-h1 rise r2">
+      Where real people help each other<br>
+      <em>live slightly better.</em>
+    </h1>
+    <p class="hero-sub rise r3">
+      Aava is being built so that honest knowledge — the kind that lives in WhatsApp groups, dinner tables, and phone calls — can finally be found by the people who need it most.
+    </p>
+    <p class="hero-tagline rise r4">Where real people help each other live slightly better — and where that help lasts.</p>
+  </div>
+</section>
+
+<!-- ═══ PROBLEM BAND ═══════════════════════ -->
+<div class="problem-band">
+  <div class="problem-band-inner reveal">
+    <h2 class="problem-band-head">The problem with buying anything in India<em> right now.</em></h2>
+    <div class="problem-list">
+      <div class="problem-item">
+        <div class="problem-item-icon">⭐</div>
+        <div class="problem-item-title">Amazon reviews are hard to trust</div>
+        <div class="problem-item-body">Too many are generic, anonymous, or difficult to verify. People still use them because there is no better trust layer.</div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-item-icon">🔗</div>
+        <div class="problem-item-title">Google is full of affiliate lists</div>
+        <div class="problem-item-body">Many “best of” lists are shaped by affiliate incentives. The loudest marketing budget often wins.</div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-item-icon">📱</div>
+        <div class="problem-item-title">Instagram disappears</div>
+        <div class="problem-item-body">Useful content on social media vanishes in 24 hours and can never be searched again.</div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-item-icon">💬</div>
+        <div class="problem-item-title">WhatsApp is ephemeral</div>
+        <div class="problem-item-body">The best honest advice in India lives in group chats. Buried by morning. Repeated forever.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MISSION ══════════════════════════════ -->
+<hr class="divider">
+<div id="mission">
+  <div class="section">
+    <div class="eyebrow reveal"><div class="eyebrow-bar"></div><span class="eyebrow-text">What Aava is</span></div>
+    <h2 class="section-h reveal">The permanent, searchable layer<br>built on trust <em>that already exists.</em></h2>
+    <p class="section-sub reveal">Indians are already running a massive peer recommendation network across millions of WhatsApp groups and dinner tables. It generates genuine purchase decisions daily and leaves no searchable trace. Aava is where that knowledge lives permanently.</p>
+
+    <div class="insight-pull reveal">
+      <p>"Some platforms show you what life could look like. Aava helps you find what genuinely makes everyday life better."</p>
+    </div>
+
+    <div class="prose reveal">
+      <p>The gap between a problem and its solution is not price or availability. The gap is awareness, activation, and trust. A real person's experience story closes all three simultaneously.</p>
+      <p>Aava is not Instagram. Not an influencer marketplace. Not Amazon reviews. The architecture is closer to Reddit — community, permanence, searchability — except with real identity and local accountability behind every word.</p>
+      <p>Every story on Aava begins with a real experience from a real person.</p>
+    </div>
+
+    <div class="values-list reveal">
+      <div class="value-item">
+        <div class="value-pip">🎯</div>
+        <div><div class="value-name">Truth over virality</div><div class="value-desc">Aava rewards what genuinely helps people — not what merely performs well.</div></div>
+      </div>
+      <div class="value-item">
+        <div class="value-pip">🧭</div>
+        <div><div class="value-name">Context over noise</div><div class="value-desc">Real buying decisions need real context — why something mattered, when it worked, what the tradeoffs were.</div></div>
+      </div>
+      <div class="value-item">
+        <div class="value-pip">🌿</div>
+        <div><div class="value-name">Calm by design</div><div class="value-desc">Aava earns return visits by being genuinely useful. Not by manufacturing anxiety or gaming attention.</div></div>
+      </div>
+      <div class="value-item">
+        <div class="value-pip">🏆</div>
+        <div><div class="value-name">Underdogs should win</div><div class="value-desc">Good products and honest businesses should be discoverable without massive advertising budgets.</div></div>
+      </div>
+      <div class="value-item">
+        <div class="value-pip">🇮🇳</div>
+        <div><div class="value-name">India-first depth</div><div class="value-desc">Built for Indian homes, Indian buying behaviour, Indian trust problems. Not adapted from somewhere else.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CREATOR SECTION ══════════════════════ -->
+<div class="creator-bg" id="creators">
+  <div class="section">
+
+    <div class="eyebrow reveal"><div class="eyebrow-bar"></div><span class="eyebrow-text">For creators</span></div>
+    <h2 class="section-h reveal">You already have the answer.<br><em>Aava just makes it last.</em></h2>
+    <p class="section-sub reveal">
+      There are people who ask you before they buy — because they trust your taste, your research, or your experience. Aava is for people who want their honest recommendations to help beyond one chat, one comment, or one moment.
+    </p>
+
+    <div class="shift reveal">
+      <div class="shift-q">"You are not being asked to perform for an algorithm. You are being invited to share useful things you genuinely know."</div>
+      <div class="shift-body">
+        No follower count required. No camera pressure. No polished influencer persona. Just real experience, clear thinking, and the willingness to help someone else make a better decision.
+      </div>
+    </div>
+
+    <h3 class="reveal" style="font-family:'Lora',serif;font-size:19px;font-weight:600;color:var(--ink);margin-bottom:6px;letter-spacing:-0.2px;">This is for you if</h3>
+    <p class="reveal" style="font-size:14px;color:var(--ink-muted);margin-bottom:20px;">You do not need to be famous. You just need to be useful and honest.</p>
+    <div class="who-grid reveal">
+      <div class="who-card">
+        <div class="who-em">🔍</div>
+        <div class="who-title">You research before you buy</div>
+        <div class="who-body">You compare options, ask around, read details, and remember what actually mattered after buying.</div>
+      </div>
+      <div class="who-card">
+        <div class="who-em">💬</div>
+        <div class="who-title">People already ask you</div>
+        <div class="who-body">Friends, family, neighbours, or colleagues trust your opinion because it comes from real experience.</div>
+      </div>
+      <div class="who-card">
+        <div class="who-em">🏠</div>
+        <div class="who-title">You have figured something out</div>
+        <div class="who-body">A home product, a skincare routine, a useful service, a local business, or a daily-life solution that others would value.</div>
+      </div>
+      <div class="who-card">
+        <div class="who-em">🌿</div>
+        <div class="who-title">You care more about honesty than hype</div>
+        <div class="who-body">You are comfortable saying what worked, what did not, who it is for, and who should avoid it.</div>
+      </div>
+    </div>
+
+    <div class="feeling reveal">
+      <div class="feeling-pip">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <div class="feeling-q">Aava is for recommendations that are too useful to disappear.</div>
+      <div class="feeling-body">If you have ever helped someone choose better, avoid a bad purchase, or discover something genuinely useful, you already understand the spirit of Aava.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ TEAM SECTION ═════════════════════════ -->
+<hr class="divider">
+<div id="team">
+  <div class="section">
+    <div class="eyebrow reveal"><div class="eyebrow-bar"></div><span class="eyebrow-text">Early team</span></div>
+    <h2 class="section-h reveal">Small team. High ownership.<br><em>Serious learning curve.</em></h2>
+    <p class="section-sub reveal">We are not looking for perfect resumes or large follower counts. We are looking for judgment, curiosity, taste, and alignment with the mission. Everyone will build, learn, test, and improve together.</p>
+
+    <div class="roles-grid reveal">
+      <div class="role-card">
+        <div class="role-icon">🎨</div>
+        <div class="role-title">Product & Design</div>
+        <div class="role-desc">Think through user experience, creator flows, and what makes a platform genuinely trustworthy.</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">⚙️</div>
+        <div class="role-title">Technology</div>
+        <div class="role-desc">Help shape a clean MVP. Care about product quality and the experience, not just shipping code.</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">🌱</div>
+        <div class="role-title">Creator Community</div>
+        <div class="role-desc">Understand creators, onboarding, and early community trust. Relationship-building, not growth hacking.</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">📖</div>
+        <div class="role-title">Content & Research</div>
+        <div class="role-desc">Study buying behaviour, identify useful experiences, and help shape what quality looks like on Aava.</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">📊</div>
+        <div class="role-title">Growth & Operations</div>
+        <div class="role-desc">Run experiments, talk to users, and turn what you learn into what happens next.</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">🧠</div>
+        <div class="role-title">Founder's Office</div>
+        <div class="role-desc">Think, write, research, coordinate. Help build the operating system of an early-stage company.</div>
+      </div>
+    </div>
+
+    <h3 class="reveal" style="font-family:'Lora',serif;font-size:19px;font-weight:600;color:var(--ink);margin-bottom:16px;letter-spacing:-0.2px;">What we are looking for</h3>
+    <div class="qualities reveal">
+      <div class="quality"><div class="q-dot"></div><div class="q-text">People who care about consumer behaviour, trust, and honest discovery</div></div>
+      <div class="quality"><div class="q-dot"></div><div class="q-text">People who like building from zero with ambiguity and real ownership</div></div>
+      <div class="quality"><div class="q-dot"></div><div class="q-text">People energised by small numbers and slow, honest progress</div></div>
+      <div class="quality"><div class="q-dot"></div><div class="q-text">People with judgment and taste — not necessarily experience</div></div>
+      <div class="quality"><div class="q-dot"></div><div class="q-text">People who prefer meaningful work over adding a line to their resume</div></div>
+      <div class="quality"><div class="q-dot"></div><div class="q-text">People who will tell you when something isn't working</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOUNDER ═══════════════════════════════ -->
+<div class="founder-bg">
+  <div class="founder-inner reveal">
+    <div class="founder-eyebrow">A note from the founder</div>
+    <h2 class="founder-h">Why Aava exists.</h2>
+    <div class="founder-body">
+      <p>The personal insight behind Aava is simple: many genuinely useful products and businesses are loved by a small circle of people — but that trust rarely travels beyond friends, family, and neighbours.</p>
+      <p>Meanwhile, what gets discovered at scale is shaped by ads, marketing budgets, and attention. That creates a gap between what is visible and what is genuinely worth knowing.</p>
+      <p>Aava is being built to close that gap — by turning scattered honest knowledge into something permanent and findable for Indian consumers, creators, and businesses.</p>
+      <p>If this mission feels meaningful to you — as a creator, a builder, or simply someone who cares about this problem — write in.</p>
+    </div>
+    <a class="founder-email" href="mailto:syam@aava.so">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      syam@aava.so
+    </a>
+    <div class="founder-divider"></div>
+    <div class="decision-q">
+      <div class="decision-label">The question that drives every decision</div>
+      <div class="decision-text">"Does this help a real person discover something that genuinely improves everyday life?"</div>
+    </div>
+    <div class="founder-sig">— <span>Syam, Founder, Aava</span></div>
+  </div>
+</div>
+
+<!-- ═══ DOUBLE CTA ════════════════════════════ -->
+<hr class="divider">
+<div class="cta-pair">
+  <div class="cta-box cta-dark reveal">
+    <div class="cta-tag">For creators</div>
+    <div class="cta-h">Be among the first voices on Aava.</div>
+    <div class="cta-p">We are inviting a small group of early creators in Hyderabad. No performance. No follower count. Just honest experience, written once, helping people for years.</div>
+    <a class="cta-btn" href="mailto:syam@aava.so?subject=I want to create on Aava&body=Hi Syam,%0D%0A%0D%0AHere%27s a bit about me:%0D%0A%0D%0ACategories I could write about:%0D%0A%0D%0AOne thing I%27ve bought recently that I have strong opinions about:%0D%0A">Apply as early creator</a>
+    <div class="cta-hint">Writes to syam@aava.so</div>
+  </div>
+  <div class="cta-box cta-light reveal">
+    <div class="cta-tag">For builders</div>
+    <div class="cta-h">Help build something that matters.</div>
+    <div class="cta-p">Early stage. High ownership. Hyderabad-based. If you are energised by unglamorous work and the long game — this is the right place.</div>
+    <a class="cta-btn" href="mailto:syam@aava.so?subject=I want to build Aava&body=Hi Syam,%0D%0A%0D%0AMy background:%0D%0AWhy Aava interests me:%0D%0ALinkedIn%2FPortfolio:%0D%0A">Apply to build Aava</a>
+    <div class="cta-hint">Include your background and what you care about</div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ════════════════════════════════ -->
+<hr class="divider">
+<footer>
+  <div class="footer">
+    <div class="footer-logo">aav<span>a</span></div>
+    <div class="footer-links">
+      <a class="footer-link" href="#mission">Mission</a>
+      <a class="footer-link" href="#creators">Creators</a>
+      <a class="footer-link" href="#team">Team</a>
+      <a class="footer-link" href="mailto:syam@aava.so">syam@aava.so</a>
+    </div>
+    <div class="footer-copy">© 2026 Aava · Building from Hyderabad</div>
+  </div>
+</footer>
+
+<script>
+/* Mobile drawer */
+function toggleDrawer() {
+  document.getElementById('drawer').classList.toggle('open');
+}
+
+/* Scroll reveal */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
